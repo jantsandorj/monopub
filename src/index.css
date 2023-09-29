@@ -1,3 +1,8 @@
+@tailwind base;
+@tailwind components;
+	.container {@apply max-w-[1450px] mx-auto} 
+	.menu_item {@apply text-base text-[#ffffff]}
+@tailwind utilities;
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,4 +15,20 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+.banner {animation-name: visual-bg; animation-duration: 2s;}
+.banner_txt {animation-name: visual-info; animation-duration: 1.5s; animation-timing-function:cubic-bezier(0.000, 1.650, 0.700, 1.010);}
+@keyframes visual-bg{ 
+	from{
+		transform: scale(1.4);
+	} to{ 
+		transform: scale(1);
+	}
+}
+@keyframes visual-info{ 
+	from{
+		opacity: 0; transform: translateX(-100%);
+	} to{ 
+		opacity: 1; transform: translateX(0%);
+	}
 }
