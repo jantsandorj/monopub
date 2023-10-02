@@ -3,15 +3,15 @@ import { lazy } from "react";
 import Loadable from "./views/Loadable";
 const Header = Loadable(lazy(() => import("./views/header.jsx")));
 const Footer = Loadable(lazy(() => import("./views/footer.jsx")));
-const Main = Loadable(lazy(() => import("./views/main.jsx")));
+const MainPage = Loadable(lazy(() => import("./views/mainpage.jsx")));
 
 function App() {
   return (
-    <main>
+    <>
       <Header />
-      <Main />
+      <MainPage />
       <Footer />
-    </main>
+    </>
   );
 }
 

@@ -3,7 +3,7 @@ import logo from "../image/tagoplus.png";
 
 const Header = () => {
   return (
-    <header className="flex justify-between container mx-auto fixed top-0 w-full left-[40px] right-[40px] h-[91px] items-center z-10">
+    <header className="flex justify-between cont mx-auto fixed top-0 w-full left-[40px] right-[40px] h-[91px] items-center z-10">
       <a href="/" className="w-[143px] brightness-[2000]">
         <img className="w-full aspect-[143/20] h-auto" src={logo} alt="logo" />
       </a>

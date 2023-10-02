@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.icon_card:first-child {background:linear-gradient(180deg, rgba(233, 222, 251, 0.71) 0%, #C5A3FB 100%);}
+.icon_card:nth-child(2) {background:linear-gradient(180deg, rgba(218, 237, 207, 0.71) 0%, #C4F9A5 100%);}
+.icon_card:last-child {background:linear-gradient(180deg, rgba(255, 240, 189, 0.71) 0%, #FFE179 100%);}
+.service {background:linear-gradient(180deg, #BDDAFF 0%, #CFE4FF 100%)}

@@ -12,7 +12,12 @@ module.exports = {
     "./src/*.{html,js,jsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        title: ["MBC1961"],
+        preten: ["Pretendard"],
+      },
+    },
   },
   plugins: [],
 };
