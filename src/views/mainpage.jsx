@@ -1,4 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import gsap from "gsap";
+import { MotionPathPlugin } from "gsap/MotionPathPlugin";
+import ScrollTrigger from "gsap/ScrollTrigger";
 import { lazy } from "react";
 import Loadable from "./Loadable";
 import pic1 from "../image/61b344e7c9c2513005ab3f00248e3faa.png";
@@ -25,24 +28,74 @@ const CarouselCom = Loadable(
 const CarouselComment = Loadable(
   lazy(() => import("../components/carouselComment"))
 );
-
 const Main = () => {
+  const [mouseCoordinates, setMouseCoordinates] = useState({ x: 0, y: 0 });
+  const mouseMoveHandler = (event) => {
+    setMouseCoordinates({
+      x: event.screenX,
+      y: event.screenY,
+    });
+  };
+  console.log(mouseCoordinates);
+  useEffect(() => {
+    window.addEventListener("mousemove", mouseMoveHandler);
+    return () => {
+      window.removeEventListener("mousemove", mouseMoveHandler);
+    };
+  }, []);
+  gsap.registerPlugin(MotionPathPlugin, ScrollTrigger);
+  useEffect(() => {
+    gsap.set("#rocket", { x:0, y: 0 });
+    let test = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#motionStart",
+        start: 0,
+        end: "+=300%+=50px",
+        scrub: true,
+        markers: true,
+      },
+    });
+    test.fromTo(
+      "#rocket",
+      { x: 0, y: 0 },
+      {
+        ease: "none",
+        motionPath: {
+          path: [
+            { x: "107", y: "717" },
+            { x: "107", y: "717" },
+            { x: "107", y: "717" },
+            { x: "107", y: "717" },
+            { x: "107", y: "717" },
+            { x: "107", y: "717" },
+            { x: "107", y: "717" },
+          ],
+        },
+      }
+    );
+  }, []);
   return (
     <div className="main">
       <section className="h-screen">
         <CarouselCom />
       </section>
-      <section className="h-screen">
+      <img
+        src={pic9}
+        alt="bg"
+        className="absolute top-[100vh] right-[90px] rotate-[72deg] w-[347px] aspect-square h-auto z-[10]"
+        id="rocket"
+      />
+      <section className="h-screen" id="motionStart">
         <div className="flex flex-col gap-[102px] cont justify-center h-full relative">
           <img
             src={pic1}
             alt="bg"
-            className="absolute scale-x-[-1] w-[760px] aspect-square h-auto z-[-1] left-[-400px]"
+            className="absolute w-[760px] aspect-square h-auto z-[-1] left-[-400px] bouncer"
           />
-          <p className="font-normal text-6xl text-center text-[black] font-title">
+          <p className="font-normal text-6xl text-center text-[black] font-title typing">
             아이티 코더를 선택해야 하는 이유
           </p>
-          <p className="text-4xl text-center text-[#BBBBBB] font-medium leading-normal font-title">
+          <p className="text-4xl text-center text-[#BBBBBB] font-medium leading-normal font-title text-up">
             디자인을 현실로 만들어내는 전문 퍼블리셔 팀입니다. 창의적인 디자인을
             <br />
             완벽하게 웹에 구현하고, 최고의 사용자 경험을 제공합니다. 프로젝트를
@@ -53,11 +106,11 @@ const Main = () => {
       </section>
       <section className="h-screen relative overflow-hidden">
         <div className="cont mx-auto flex flex-col justify-center gap-[96px] h-full">
-          <h2 className="text-6xl text-center text-[#393939] font-title">
+          <h2 className="text-6xl text-center text-[#393939] font-title typing">
             아이티 코더를 만나보세요!
           </h2>
           <div className="card_wrap flex justify-around">
-            <div className="rounded-[15px] bg-[linear-gradient(180deg, rgba(233, 222, 251, 0.71) 0%, #C5A3FB 100%);] w-[350px] h-[570px] relative icon_card">
+            <div className="rounded-[15px] bg-[linear-gradient(180deg, rgba(233, 222, 251, 0.71) 0%, #C5A3FB 100%);] w-[350px] h-[570px] relative text-up">
               <p className="text-[#393939] text-2xl font-normal ms-[26px] mt-[92px] mb-[8px] leading-[29px]">
                 총 계약된 프로젝트
               </p>
@@ -71,7 +124,7 @@ const Main = () => {
                 className="absolute bottom-0 left-0 right-0 mx-auto"
               />
             </div>
-            <div className="rounded-[15px] bg-[linear-gradient(180deg, rgba(233, 222, 251, 0.71) 0%, #C5A3FB 100%);] w-[350px] h-[570px] relative icon_card">
+            <div className="rounded-[15px] bg-[linear-gradient(180deg, rgba(233, 222, 251, 0.71) 0%, #C5A3FB 100%);] w-[350px] h-[570px] relative text-up">
               <p className="text-[#393939] text-2xl font-normal ms-[26px] mt-[92px] mb-[8px] leading-[29px]">
                 총 계약된 프로젝트
               </p>
@@ -85,7 +138,7 @@ const Main = () => {
                 className="absolute bottom-0 left-0 right-0 mx-auto"
               />
             </div>
-            <div className="rounded-[15px] bg-[linear-gradient(180deg, rgba(233, 222, 251, 0.71) 0%, #C5A3FB 100%);] w-[350px] h-[570px] relative icon_card">
+            <div className="rounded-[15px] bg-[linear-gradient(180deg, rgba(233, 222, 251, 0.71) 0%, #C5A3FB 100%);] w-[350px] h-[570px] relative text-up">
               <p className="text-[#393939] text-2xl font-normal ms-[26px] mt-[92px] mb-[8px] leading-[29px]">
                 총 계약된 프로젝트
               </p>
@@ -117,7 +170,7 @@ const Main = () => {
           <p className="font-normal text-6xl text-center text-[black] font-title">
             퍼블리싱 전문 업체 - 디자인을 현실로
           </p>
-          <p className="text-4xl text-center text-[#BBBBBB] font-medium leading-normal font-title">
+          <p className="text-4xl text-center text-[#BBBBBB] font-medium leading-normal font-title text-up">
             우리는 기술, 품질, 그리고 혁신을 통한 서비스 제공에 자부심을
             가집니다. <br />
             고객 중심의 접근 방식으로 당신의 프로젝트를 향상시키고 결과를
@@ -142,7 +195,7 @@ const Main = () => {
               <br /> 필요한 모든 전문가를 만나보세요.
             </p>
             <div className="btn_wrap flex gap-5">
-              <button className="btn w-[155px] h-[40px] active:scale-95">
+              <button className="btn w-[155px] h-[40px] active:scale-95 before:ease relative overflow-hidden shadow-md transition-all before:absolute before:right-0 before:top-0 before:h-full before:w-full before:translate-x-24 before:rotate-6 before:bg-white before:opacity-10 before:duration-700 hover:shadow-button hover:before:-translate-x-40">
                 <span className="font-normal text-sm leading-normal text-[#393939] py-3">
                   자세히 보기
                 </span>
@@ -159,7 +212,7 @@ const Main = () => {
                   />
                 </svg>
               </button>
-              <button className="btn w-[155px] h-[40px] active:scale-95 hover:">
+              <button className="btn w-[155px] h-[40px] active:scale-95 before:ease relative overflow-hidden shadow-md transition-all before:absolute before:right-0 before:top-0 before:h-12 before:w-6 before:translate-x-12 before:rotate-6 before:bg-white before:opacity-10 before:duration-700 hover:shadow-button hover:before:-translate-x-40">
                 <span className="font-normal text-sm leading-normal text-[#393939] py-3">
                   퍼블리싱 의뢰
                 </span>
@@ -194,7 +247,7 @@ const Main = () => {
                 <h2 className="text-[#393939] text-[32px] font-semibold leading-normal">
                   우리의 서비스를 만나보세요
                 </h2>
-                <p className="text-[#393939] text-base font-normal leading-normal">
+                <p className="text-[#393939] text-base font-normal leading-normal text-up">
                   저렴하고 빠른 웹 퍼블리싱... <br />
                   우리는 웹 퍼블리싱 분야에서 가장 저렴하고 빠른 작업을
                   제공합니다.
@@ -220,7 +273,7 @@ const Main = () => {
           className="absolute top-0 aspect-[1708/490] w-[89%] h-auto z-[-1] mx-auto left-0 right-0"
         />
       </section>
-      <section className="h-[1080px] relative">
+      <section className="h-[1080px] relative" id="comment">
         <img
           src={pic7}
           alt="bg"
@@ -231,7 +284,7 @@ const Main = () => {
             <p className="font-normal text-6xl text-center text-[black] font-title">
               우리와 함께한 프로젝트의 성공 사례
             </p>
-            <p className="text-4xl text-center text-[#BBBBBB] font-medium leading-normal font-title">
+            <p className="text-4xl text-center text-[#BBBBBB] font-medium leading-normal font-title text-up">
               우리는 다양한 프로젝트에서 뛰어난 성과를 이뤘습니다. <br />
               저희와 함께한 클라이언트들은 웹사이트 퍼블리싱의 높은 수준과
               결과에 감명을 받았습니다. <br /> 몇몇 사례는 다음과 같습니다.
@@ -240,7 +293,7 @@ const Main = () => {
           <CarouselComment />
         </div>
       </section>
-      <section className="h-[1080px] ">
+      <section className="h-[1080px]" id="bg-move">
         <div className="wrap flex flex-col justify-center gap-[88px] relative h-full ">
           <div className="cont relative w-full">
             <img
@@ -265,88 +318,104 @@ const Main = () => {
               src={pic8}
               alt="bg"
               className="absolute top-[150%] left-0 w-[614px] aspect-square h-auto z-[-1]"
+              id="earth"
             />
           </div>
           <div className="flex flex-col gap-y-[35px] overflow-hidden">
-            <div className="row flex gap-x-[20px]" id="row1">
+            <div
+              className="row flex gap-x-[20px] left-[-1000px] relative"
+              id="row1"
+            >
               <div className="item">
-                <img src={move1} alt="move" />
+                <img src={move1} alt="move" className="w-full h-full" />
               </div>
               <div className="item">
-                <img src={move2} alt="move" />
+                <img src={move2} alt="move" className="w-full h-full" />
               </div>
               <div className="item">
-                <img src={move3} alt="move" />
+                <img src={move3} alt="move" className="w-full h-full" />
               </div>
               <div className="item">
-                <img src={move4} alt="move" />
+                <img src={move4} alt="move" className="w-full h-full" />
               </div>
               <div className="item">
-                <img src={move1} alt="move" />
+                <img src={move1} alt="move" className="w-full h-full" />
               </div>
               <div className="item">
-                <img src={move2} alt="move" />
+                <img src={move2} alt="move" className="w-full h-full" />
               </div>
               <div className="item">
-                <img src={move3} alt="move" />
+                <img src={move3} alt="move" className="w-full h-full" />
               </div>
               <div className="item">
-                <img src={move4} alt="move" />
+                <img src={move4} alt="move" className="w-full h-full" />
+              </div>
+              <div className="item">
+                <img src={move1} alt="move" className="w-full h-full" />
+              </div>
+              <div className="item">
+                <img src={move3} alt="move" className="w-full h-full" />
+              </div>
+              <div className="item">
+                <img src={move4} alt="move" className="w-full h-full" />
+              </div>
+              <div className="item">
+                <img src={move1} alt="move" className="w-full h-full" />
               </div>
             </div>
             <div
-              className="row flex gap-x-[20px] left-[100px] relative"
+              className="row flex gap-x-[20px] left-[-300px] relative"
               id="row2"
             >
               <div className="item">
-                <img src={move1} alt="move" />
+                <img src={move1} alt="move" className="w-full h-full" />
               </div>
               <div className="item">
-                <img src={move2} alt="move" />
+                <img src={move2} alt="move" className="w-full h-full" />
               </div>
               <div className="item">
-                <img src={move3} alt="move" />
+                <img src={move3} alt="move" className="w-full h-full" />
               </div>
               <div className="item">
-                <img src={move4} alt="move" />
+                <img src={move4} alt="move" className="w-full h-full" />
               </div>
               <div className="item">
-                <img src={move1} alt="move" />
+                <img src={move1} alt="move" className="w-full h-full" />
               </div>
               <div className="item">
-                <img src={move2} alt="move" />
+                <img src={move2} alt="move" className="w-full h-full" />
               </div>
               <div className="item">
-                <img src={move3} alt="move" />
+                <img src={move3} alt="move" className="w-full h-full" />
               </div>
               <div className="item">
-                <img src={move4} alt="move" />
+                <img src={move4} alt="move" className="w-full h-full" />
               </div>
             </div>
-            <div className="row flex gap-x-[20px]" id="row3">
+            <div className="row flex gap-x-[20px] left-0 relative" id="row3">
               <div className="item">
-                <img src={move1} alt="move" />
+                <img src={move1} alt="move" className="w-full h-full" />
               </div>
               <div className="item">
-                <img src={move2} alt="move" />
+                <img src={move2} alt="move" className="w-full h-full" />
               </div>
               <div className="item">
-                <img src={move3} alt="move" />
+                <img src={move3} alt="move" className="w-full h-full" />
               </div>
               <div className="item">
-                <img src={move4} alt="move" />
+                <img src={move4} alt="move" className="w-full h-full" />
               </div>
               <div className="item">
-                <img src={move1} alt="move" />
+                <img src={move1} alt="move" className="w-full h-full" />
               </div>
               <div className="item">
-                <img src={move2} alt="move" />
+                <img src={move2} alt="move" className="w-full h-full" />
               </div>
               <div className="item">
-                <img src={move3} alt="move" />
+                <img src={move3} alt="move" className="w-full h-full" />
               </div>
               <div className="item">
-                <img src={move4} alt="move" />
+                <img src={move4} alt="move" className="w-full h-full" />
               </div>
             </div>
           </div>
@@ -363,7 +432,7 @@ const Main = () => {
           </h2>
           <table>
             <tbody className="border-t border-[#393939]">
-              <tr className="border-b border-[#aaaaaa] h-[120px]">
+              <tr className="border-b border-[#aaaaaa] h-[120px] news">
                 <td className="text-[#F6624F] font-preten text-[20px] w-[12%] text-center">
                   공지사항
                 </td>
@@ -374,7 +443,7 @@ const Main = () => {
                   2023.09.28
                 </td>
               </tr>
-              <tr className="border-b border-[#aaaaaa] h-[120px]">
+              <tr className="border-b border-[#aaaaaa] h-[120px] news">
                 <td className="text-[#328CFF] font-preten text-[20px] w-[12%] text-center">
                   뉴스
                 </td>
@@ -385,7 +454,7 @@ const Main = () => {
                   2023.09.28
                 </td>
               </tr>
-              <tr className="border-b border-[#aaaaaa] h-[120px]">
+              <tr className="border-b border-[#aaaaaa] h-[120px] news">
                 <td className="text-[#328CFF] font-preten text-[20px] w-[12%] text-center">
                   뉴스
                 </td>
@@ -398,7 +467,7 @@ const Main = () => {
               </tr>
             </tbody>
           </table>
-          <p className="text-[#bbb] font-title text-[36px] leading-normal pt-[53px] px-[38.5px]">
+          <p className="text-[#bbb] font-title text-[36px] leading-normal pt-[53px] px-[38.5px] text-up">
             우리의 공지사항 게시판은 항상 최신 소식과 유용한 정보로 가득 차
             있습니다. 언제든지 최신 업데이트를 확인하세요!
           </p>
@@ -440,7 +509,7 @@ const Main = () => {
               3) 소비자의 불만 또는 분쟁처리에 관한 기록 : 3년
             </p>
             <div className="flex justify-center mt-[22px] mb-[18px] items-center slide">
-              <span className="text-[#828282] font-preten font-normal text-[20px] sliderSpan">
+              <span className="text-[#828282] font-preten font-normal text-[20px]">
                 동의하지 않습니다.
               </span>
               <label className="relative inline-flex items-center cursor-pointer mx-[9px] active:scale-95 duration-300 slider-label">
@@ -449,7 +518,7 @@ const Main = () => {
                   value=""
                   type="checkbox"
                 />
-                <div className="group peer  bg-[#d9d9d9] rounded-full outline-none duration-1000 after:duration-300 w-24 h-12  shadow-md  peer-focus:outline-none  after:content-[''] after:rounded-full after:absolute after:[background:#fefefe]   peer-checked:after:rotate-180 peer-checked:after:[background:#E92927] after:outline-none after:h-8 after:w-8 after:top-2 after:left-2 peer-checked:after:translate-x-12 peer-hover:after:scale-110 peer-checked:peer-[text-[#E92927]]"></div>
+                <div className="group peer  bg-[#d9d9d9] rounded-full outline-none duration-1000 after:duration-300 w-24 h-12  shadow-md  peer-focus:outline-none  after:content-[''] after:rounded-full after:absolute after:[background:#ffffff]   peer-checked:after:rotate-180 peer-checked:after:[background:#ffffff] after:outline-none after:h-8 after:w-8 after:top-2 after:left-2 peer-checked:after:translate-x-12 peer-checked:bg-[#F6624F] peer-hover:after:scale-110 peer-checked:peer-[text-[#E92927]]"></div>
               </label>
               <span className="text-[#828282] font-preten font-normal text-[20px] sliderSpan">
                 위의 정책에 동의합니다.
@@ -457,7 +526,7 @@ const Main = () => {
             </div>
           </div>
           <div className="border border-[#aaaaaa] rounded-[10px] w-full">
-            <div className="mx-[35px] mt-[47px] flex flex-col gap-[15px]">
+            <form className="mx-[35px] mt-[47px] flex flex-col gap-[15px]">
               <div className="bg-[#f7f7f7] h-[73px] rounded-[10px] flex items-center px-[34px]">
                 <label
                   htmlFor="name"
@@ -470,6 +539,7 @@ const Main = () => {
                   id="name"
                   className="w-[292px] h-[45px] rounded-[10px] ps-[15px] placeholder-[#d3d3d3] text-sm font-preten focus:outline outline-offset-2 outline-1"
                   placeholder="연락처를 입력하세요."
+                  required
                 />
               </div>
               <div className="bg-[#f7f7f7] h-[73px] rounded-[10px] flex items-center px-[34px]">
@@ -484,6 +554,7 @@ const Main = () => {
                   id="contact"
                   className="w-[292px] h-[45px] rounded-[10px] ps-[15px] placeholder-[#d3d3d3] text-sm font-preten focus:outline outline-offset-2 outline-1"
                   placeholder="연락처를 입력하세요."
+                  required
                 />
               </div>
               <div className="bg-[#f7f7f7] h-[73px] rounded-[10px] flex items-center px-[34px]">
@@ -498,6 +569,7 @@ const Main = () => {
                   id="email"
                   className="w-[292px] h-[45px] rounded-[10px] ps-[15px] placeholder-[#d3d3d3] text-sm font-preten focus:outline outline-offset-2 outline-1"
                   placeholder="이메일 주소를 입력하세요."
+                  required
                 />
               </div>
               <div className="bg-[#f7f7f7] h-[73px] rounded-[10px] flex items-center px-[34px]">
@@ -510,16 +582,74 @@ const Main = () => {
                 <select
                   id="inquiry"
                   className=" w-[292px] h-[45px] rounded-[10px] ps-[15px] text-sm font-preten focus:outline outline-offset-2 outline-1 "
-                  placeholder="placeholder-[#d3d3d3]"
+                  required
                 >
-                  {/* <option selected className="text-[#d3d3d3]"></option> */}
-                  <option value="US">United States</option>
-                  <option value="CA">Canada</option>
-                  <option value="FR">France</option>
-                  <option value="DE">Germany</option>
+                  <option value={""} hidden>
+                    선택
+                  </option>
+                  <option value="의뢰 문의">의뢰 문의</option>
+                  <option value="유지보수 문의">유지보수 문의</option>
+                  <option value="기타 문의">기타 문의</option>
                 </select>
               </div>
-            </div>
+              <div className="bg-[#f7f7f7] h-[73px] rounded-[10px] flex items-center px-[34px]">
+                <label
+                  htmlFor="title"
+                  className="ps-[4px] w-[97px] text-base text-[#393939] font-preten"
+                >
+                  제목
+                </label>
+                <input
+                  type="text"
+                  id="title"
+                  className="w-[935px] h-[45px] rounded-[10px] ps-[15px] placeholder-[#d3d3d3] text-sm font-preten focus:outline outline-offset-2 outline-1"
+                  placeholder="제목을 입력하세요."
+                  required
+                />
+              </div>
+              <div className="bg-[#f7f7f7] rounded-[10px] flex items-center px-[34px]">
+                <label
+                  htmlFor="detail"
+                  className="ps-[4px] w-[97px] text-base text-[#393939] font-preten"
+                >
+                  내용
+                </label>
+                <input
+                  type="text"
+                  id="detail"
+                  className="w-[935px] h-[215px] rounded-[10px] ps-[15px] my-[15.5px] placeholder-[#d3d3d3] text-sm font-preten focus:outline outline-offset-2 outline-1"
+                  placeholder="내용을 입력하세요."
+                  required
+                />
+              </div>
+              <div className="bg-[#f7f7f7] rounded-[10px] flex items-center px-[34px] mt-[5px] h-[73px]">
+                <p className="ps-[4px] w-[97px] text-base text-[#393939] font-preten">
+                  첨부파일
+                </p>
+                <input
+                  type="file"
+                  id="file"
+                  className="w-[292px] h-[45px] rounded-[10px] ps-[15px] text-sm font-preten focus:outline outline-offset-2 outline-1 border-0 bg-[#ffffff]"
+                  required
+                />
+                <label
+                  htmlFor="file"
+                  className="ms-[16px] w-[127px] h-[45px] text-sm text-[#393939] font-preten border-[5px] border-[#ffffff] flex items-center justify-center active:scale-95"
+                >
+                  찾아보기
+                </label>
+              </div>
+              <div className="flex justify-center gap-x-[15px] mb-[31px]">
+                <button className="w-[134px] h-[48px] inline-flex items-center justify-center bg-[#F6624F] rounded-[12px] active:scale-95 before:ease relative overflow-hidden shadow-md transition-all before:absolute before:right-[-100%] before:top-0 before:h-full before:w-6 before:translate-x-0 before:rotate-6 before:bg-white before:opacity-10 before:duration-700 hover:shadow-button hover:before:-translate-x-96">
+                  <span className="text-sm font-medium text-white">등록</span>
+                </button>
+                <button className="w-[134px] h-[48px] inline-flex items-center justify-center bg-[#B6B6B6] rounded-[12px] active:scale-95 before:ease relative overflow-hidden shadow-md transition-all before:absolute before:right-[-100%] before:top-0 before:h-full before:w-6 before:translate-x-0 before:rotate-6 before:bg-white before:opacity-10 before:duration-700 hover:shadow-button hover:before:-translate-x-96">
+                  <span className="text-sm font-medium text-[#F4F4F5]">
+                    취소
+                  </span>
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </section>
