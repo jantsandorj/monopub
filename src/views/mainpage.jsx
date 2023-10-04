@@ -4,7 +4,6 @@ import { MotionPathPlugin } from "gsap/MotionPathPlugin";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { lazy } from "react";
 import Loadable from "./Loadable";
-
 import pic1 from "../image/61b344e7c9c2513005ab3f00248e3faa.png";
 import pic2 from "../image/e9cd64066aa90cc81a75d3716d453a60.png";
 import pic3 from "../image/811b1fbb987207ad0b0c01167fe3b4b9.png";
@@ -40,17 +39,16 @@ const Main = () => {
       duration: 2,
       scrollTrigger: {
         trigger: ".bg-move",
-        markers: true,
         start: "top center",
         end: "bottom center",
         scrub: 1,
-        // toggleAction: "active",
+        toggleAction: "active",
       },
     });
   }, []);
   return (
-    <div className="main">
-      <section className="h-screen">
+    <div className="main relative">
+      <section className="h-screen bg-black">
         <CarouselCom />
       </section>
       <section className="h-screen" id="motionStart">
@@ -58,7 +56,7 @@ const Main = () => {
           <img
             src={pic1}
             alt="bg"
-            className="absolute w-[760px] aspect-square h-auto z-[-1] left-[-400px] bouncer"
+            className="absolute w-[760px] aspect-square h-auto z-[1] left-[-400px] bouncer"
           />
           <p className="font-normal text-6xl text-center text-[black] font-title fade-in-left">
             아이티 코더를 선택해야 하는 이유

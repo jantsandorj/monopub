@@ -26,14 +26,14 @@ function ItemCom({ item }) {
         gap={5}
         className="xs:items-center xs:justify-start md:items-start md:justify-center px-[25px] lg:px-0 z-[10] pt-[25px] md:pt-0 overflow-hidden"
       >
-        <p className="text-base font-medium text-[#000000] text-right w-full">
+        <p className="text-base font-medium text-[#000000] text-right w-full comment_txt">
           {item.maintext}
         </p>
-        <h3 className="text-2xl font-medium text-[#000000] text-right w-full">
+        <h3 className="text-2xl font-medium text-[#000000] text-right w-full comment_txt">
           {item.subtext}
         </h3>
       </Grid>
-      <picture className="w-[40%] h-full bottom-0 border-b border-[#000000]">
+      <picture className="w-[40%] h-full bottom-0 border-b border-[#000000] comment">
         <source srcSet={item.image} media="(max-width: 600px)" />
         <source srcSet={item.image} media="(min-width: 601px)" />
         <img
@@ -59,6 +59,12 @@ const CarouselComment = () => {
         "사실 저희 사업내용을 알려주고 제작문의를 했을 때 \n 자신 없다고 한 업체가 많았어요.\r\n견적가가 맞지 않는 곳도 많았고 제작이 어렵다고 하는 곳도 많았는데,",
       subtext: "PS&Marketing 홈페이지 제작",
     },
+    {
+      image: carousel1,
+      maintext:
+        "사실 저희 사업내용을 알려주고 제작문의를 했을 때 \n 자신 없다고 한 업체가 많았어요.\r\n견적가가 맞지 않는 곳도 많았고 제작이 어렵다고 하는 곳도 많았는데,",
+      subtext: "PS&Marketing 홈페이지 제작",
+    },
   ];
   return (
     <Grid
@@ -71,7 +77,7 @@ const CarouselComment = () => {
     >
       <Carousel
         animation="slide"
-        interval={45000}
+        interval={5000}
         next={(next, active) => console.log()}
         prev={(prev, active) => console.log()}
         indicatorContainerProps={{

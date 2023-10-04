@@ -32,14 +32,20 @@ code {
 }
 .banner {animation-name: visual-bg; animation-duration: 2s;}
 .banner_txt {animation-name: visual-info; animation-duration: 1.5s; animation-timing-function:cubic-bezier(0.000, 1.650, 0.700, 1.010);}
+.comment {animation-name: visual-bg; animation-duration: 3s;}
+.comment_txt {animation-name: visual-info; animation-duration: 1s;}
 .slide:has(> label > input:checked) > .sliderSpan {color: #E92927;}
 @keyframes visual-bg{ 
 	from{transform: scale(1.4);} 
   to{transform: scale(1);}
 }
+@keyframes visual-bg{ 
+	from{transform: scale(0.7);} 
+  to{transform: scale(1);}
+}
 @keyframes visual-info{ 
 	from{opacity: 0; transform: translateX(-100%);} 
-  to{opacity: 1; transform: translateX(0%);}
+  to{opacity: 1; transform: translateX(0%); }
 }
 @keyframes text-anime{ 
 	from{opacity: 0; transform: translateY(50px);} 
@@ -63,7 +69,7 @@ code {
 #inquiry:required:invalid {color: #d3d3d3;}
 #file::-webkit-file-upload-button {visibility: hidden;}
 input:focus, select:focus {transform: scale(1.005); transition: 0.4s;}
-.news:hover {background-color: #FEF6F4; transition: all 0.5s; }
+.news:hover {background-color: #FEF6F4; transition: all 0.3s; }
 @keyframes text-up{ 
 	from{opacity: 0; transform: translateY(100px);} 
   to{opacity: 1; transform: translateY(0);}
@@ -78,8 +84,8 @@ input:focus, select:focus {transform: scale(1.005); transition: 0.4s;}
 .active tbody tr:nth-child(1) {transition-delay: 0.3s;}
 .active tbody tr:nth-child(2) {transition-delay: 0.6s;}
 .active tbody tr:nth-child(3) {transition-delay: 0.9s;}
-.active form>div:nth-child(1) {transition-delay: 1s;}
-.active form>div:nth-child(2) {transition-delay: 1.4s;}
+.active form>div:nth-child(1) {transition-delay: 1.2s;}
+.active form>div:nth-child(2) {transition-delay: 1.5s;}
 .active form>div:nth-child(3) {transition-delay: 1.8s;}
 .active form>div:nth-child(4) {transition-delay: 2.0s;}
 .active form>div:nth-child(5) {transition-delay: 2.2s;}
@@ -114,3 +120,5 @@ path {
   100% {stroke: #ffffff;
   fill: none;}
 }
+#motionStart {background: #000; transition: background 0.7s ease-out;}
+.active#motionStart {background: #fff;}
