@@ -59,13 +59,6 @@ code {
 		opacity: 1; transform: translateY(0);
 	}
 }
-@keyframes rotate{ 
-	from{
-		transform: rotate(0deg);
-	} to{ 
-		transform: rotate(360deg);
-	}
-}
 .active .bouncer {
   animation: mover 3s ease-in-out 0.5s infinite;
 }
@@ -108,4 +101,68 @@ input:focus, select:focus {transform: scale(1.005); transition: 0.4s;}
 	}
 }
 .active .text-up {animation: text-up 2s ease;}
-.active .rotate {animation: rotate 5s ease;}
+.active .fade-in-left {
+  animation: fade-in-left 2s ease;
+}
+@keyframes fade-in-left {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.active form>div, .active tbody tr {
+  opacity: 1;
+  transform: translateY(0);
+}
+.active tbody tr:nth-child(1) {
+  transition-delay: 0.3s;
+}
+
+.active tbody tr:nth-child(2) {
+  transition-delay: 0.6s;
+}
+
+.active tbody tr:nth-child(3) {
+  transition-delay: 0.9s;
+}
+
+.active form>div:nth-child(1) {
+  transition-delay: 1s;
+}
+
+.active form>div:nth-child(2) {
+  transition-delay: 1.4s;
+}
+
+.active form>div:nth-child(3) {
+  transition-delay: 1.8s;
+}
+
+.active form>div:nth-child(4) {
+  transition-delay: 2.2s;
+}
+
+.active form>div:nth-child(5) {
+  transition-delay: 2.6s;
+}
+.active form>div:nth-child(6) {
+  transition-delay: 3s;
+}
+
+.active form>div:nth-child(7) {
+  transition-delay: 3.4s;
+}
+.active form>div:nth-child(8) {
+  transition-delay: 3.8s;
+}
+
+form>div, tbody tr  {
+  transform: translateY(50px);
+  transition: opacity 1s, transform 1s;
+}
+
+.service {background:linear-gradient(180deg, #BDDAFF 0%, #CFE4FF 100%)}

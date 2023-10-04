@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import logo from "../image/tagoplus.png";
 
 const Header = () => {
-  if (typeof window !== "undefined") {
-    window.addEventListener("scroll", function () {
+  useEffect(() => {
+    const handleScroll = () => {
       const Navbar = document.getElementById("head");
       const logo = document.getElementById("header_logo");
       const li = document.querySelectorAll(".menu_item");
       const liArray = Array.from(li);
       const scrollTop = window.scrollY;
-      if (scrollTop > this.window.innerHeight) {
+
+      if (scrollTop > window.innerHeight) {
         Navbar.style.backgroundColor = "#ffffff";
         liArray.forEach((a) => {
           a.style.color = "#393939";
@@ -22,8 +23,14 @@ const Header = () => {
         });
         logo.style.filter = "brightness(2000)";
       }
-    });
-  }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll, { passive: true });
+    };
+  }, []);
+
   return (
     <header className="h-[91px] w-full fixed duration-700 z-50" id="head">
       <div className="header_wrap flex justify-between cont mx-auto fixed top-0 w-full left-[40px] right-[40px] h-[91px] items-center z-50">
