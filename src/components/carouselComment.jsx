@@ -33,7 +33,7 @@ function ItemCom({ item }) {
           {item.subtext}
         </h3>
       </Grid>
-      <picture className="w-[40%] h-full bottom-0 border-b border-[#000000] comment">
+      <picture className="w-[40%] h-full bottom-0 border-b border-[#000000] comment pointer-events-none">
         <source srcSet={item.image} media="(max-width: 600px)" />
         <source srcSet={item.image} media="(min-width: 601px)" />
         <img

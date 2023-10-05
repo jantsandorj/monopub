@@ -13,7 +13,7 @@ function App() {
       var windowHeight = window.innerHeight;
       content_conts.forEach(function (content_cont) {
         var rect = content_cont.getBoundingClientRect();
-        if (rect.top - windowHeight / 1.5 <= 0) {
+        if (rect.top - windowHeight / 1.3 <= 0) {
           content_cont.classList.add("active");
         } else {
           content_cont.classList.remove("active");
