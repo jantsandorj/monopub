@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
+import gsap from "gsap";
 import { lazy } from "react";
+import { MotionPathPlugin } from "gsap/MotionPathPlugin";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Loadable from "./Loadable";
 import pic1 from "../image/61b344e7c9c2513005ab3f00248e3faa.png";
 import pic2 from "../image/e9cd64066aa90cc81a75d3716d453a60.png";
@@ -20,8 +23,25 @@ const CarouselComment = Loadable(
 );
 const ContactForm = Loadable(lazy(() => import("../components/form")));
 const Bglogo = Loadable(lazy(() => import("../components/bglogo")));
+gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(MotionPathPlugin);
 
 const Main = () => {
+  let earth = useRef(null);
+  let triggerSection = useRef(null);
+  useEffect(() => {
+    ScrollTrigger.refresh();
+    gsap.from(earth, {
+      rotate: 180,
+      scrollTrigger: {
+        trigger: triggerSection,
+        start: "top center",
+        end: "bottom center",
+        scrub: 1,
+        toggleAction: "active",
+      },
+    });
+  }, []);
   return (
     <div className="main relative">
       <section className="h-screen bg-black">
@@ -220,14 +240,14 @@ const Main = () => {
         <img
           src={pic4}
           alt="bg"
-          className="absolute top-0 aspect-[1708/490] w-[89%] h-auto z-[-1] mx-auto left-0 right-0"
+          className="absolute top-0 aspect-[1708/490] w-[89%] h-auto z-[-1] mx-auto left-0 right-0 bouncer"
         />
       </section>
       <section className="h-[1080px] relative" id="comment">
         <img
           src={pic7}
           alt="bg"
-          className="absolute w-[1540px] h-[686px] z-[-1] left-0 right-0 mx-auto top-[70px]"
+          className="absolute w-[1540px] h-[686px] z-[-1] left-0 right-0 mx-auto top-[70px] bouncer"
         />
         <div className="cont flex flex-col gap-[70px] justify-center h-full">
           <div className="flex flex-col gap-[102px] cont justify-center relative">
@@ -248,7 +268,11 @@ const Main = () => {
           <CarouselComment />
         </div>
       </section>
-      <section className="h-[1080px] bg-move" id="bg-move">
+      <section
+        className="h-[1080px] bg-move"
+        id="bg-move"
+        ref={(el) => (triggerSection = el)}
+      >
         <div className="wrap flex flex-col justify-center gap-[88px] relative h-full ">
           <div className="cont relative w-full">
             <img
@@ -273,6 +297,7 @@ const Main = () => {
               src={pic8}
               alt="bg"
               className="absolute top-[150%] left-0 w-[614px] aspect-square h-auto z-[-1]"
+              ref={(el) => (earth = el)}
             />
           </div>
           <Bglogo />
