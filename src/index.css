@@ -125,4 +125,4 @@ form>div, tbody tr  {transform: translateY(50px); transition: opacity 1s, transf
 .card:hover p{color: #ffffff;}
 .card:hover span{color: #ffffff;}
 .card:hover svg path { animation: animate-firstAnimatedSvg 1s linear forwards;}
-.grayTxt:hover {color: #000; transition: all 0.5s;}
+.grayTxt:hover {color: #F8897B; transition: all 0.5s;}
